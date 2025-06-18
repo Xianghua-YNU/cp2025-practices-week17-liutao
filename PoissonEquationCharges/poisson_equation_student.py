@@ -59,9 +59,19 @@ def solve_poisson_equation(M: int = 100, target: float = 1e-6, max_iterations: i
     delta=1.0
     iterations=0
     converged=False
+    # 主迭代循环
+    while delta > target and iterations < max_iterations:
+    # 更新内部网格点
+        phi[1:-1, 1:-1] = 0.25 * (phi[0:-2, 1:-1] + phi[2:, 1:-1] + 
+                               phi[1:-1, :-2] + phi[1:-1, 2:] + 
+                               h*h * rho[1:-1, 1:-1])
     
+    # 计算收敛判据
+        delta = np.max(np.abs(phi - phi_prev))
+        phi_prev = np.copy(phi)
+        iterations += 1
+        converged = (delta <= target)
     # TODO: 设置网格间距
-    h = 1.0
     
     # TODO: 初始化电势数组，形状为(M+1, M+1)
     # 提示：使用 np.zeros() 创建数组
@@ -95,8 +105,7 @@ def solve_poisson_equation(M: int = 100, target: float = 1e-6, max_iterations: i
     # TODO: 检查是否收敛
     # converged = (delta <= target)
     
-    # TODO: 返回结果
-    raise NotImplementedError(f"请在 {__file__} 中实现此函数")
+
 
 def visualize_solution(phi: np.ndarray, M: int = 100) -> None:
     """
