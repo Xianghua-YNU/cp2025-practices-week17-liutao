@@ -5,6 +5,9 @@
 """
 import numpy as np
 import matplotlib.pyplot as plt
+#设置matplotlib全局语言为中文
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 
 def solve_ode(h, g, max_iter=10000, tol=1e-6):
     """
@@ -34,15 +37,23 @@ def solve_ode(h, g, max_iter=10000, tol=1e-6):
     # 初始化解数组，边界条件已满足：x[0] = x[-1] = 0
     x = np.zeros(t.size)
     
-    # TODO: 实现松弛迭代算法
-    # 提示：
-    # 1. 设置初始变化量 delta = 1.0
-    # 2. 当 delta > tol 时继续迭代
-    # 3. 对内部点应用公式：x_new[1:-1] = 0.5 * (h*h*g + x[2:] + x[:-2])
-    # 4. 计算最大变化量：delta = np.max(np.abs(x_new - x))
-    # 5. 更新解：x = x_new
+    # 实现松弛迭代算法
+    delta = 1.0
+    iter_count = 0
     
-    raise NotImplementedError(f"请在 {__file__} 中实现此函数")
+    while delta > tol and iter_count < max_iter:
+        x_new = np.copy(x)
+        # 应用迭代公式更新内部点
+        x_new[1:-1] = 0.5 * (h*h*g + x[2:] + x[:-2])
+        # 计算最大变化量
+        delta = np.max(np.abs(x_new - x))
+        # 更新解
+        x = x_new
+        iter_count += 1
+
+        #输出迭代次数
+    print(f"收敛于 {iter_count} 次迭代，最终变化量: {delta:.2e}")
+    return t, x
 
 if __name__ == "__main__":
     # 测试参数
@@ -59,3 +70,9 @@ if __name__ == "__main__":
     plt.title('抛体运动轨迹 (松弛迭代法)')
     plt.grid()
     plt.show()
+
+    #输出最高高度与时间
+    max_height = np.max(x)
+    max_time = t[np.argmax(x)]
+    print(f"最高高度: {max_height:.2f} m 当 t = {max_time:.2f} s")
+    
