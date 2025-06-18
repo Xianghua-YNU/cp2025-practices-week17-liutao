@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-"""
-模块: 有限厚度平行板电容器求解
-文件: finite_thickness_capacitor_solution.py
-
-使用高斯 - 赛德尔超松弛（SOR）方法求解有限厚度平行板电容器的拉普拉斯方程，并计算电荷密度分布。
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
