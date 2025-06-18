@@ -4,6 +4,7 @@ from matplotlib.patches import Rectangle
 import time
 from scipy.ndimage import laplace
 
+
 def solve_laplace_sor(nx, ny, plate_thickness, plate_separation, omega=1.9, max_iter=10000, tolerance=1e-6):
     """
     Solve 2D Laplace equation using Successive Over-Relaxation (SOR) method
@@ -79,6 +80,7 @@ def solve_laplace_sor(nx, ny, plate_thickness, plate_separation, omega=1.9, max_
 
     return U
 
+
 def calculate_charge_density(potential_grid, dx, dy):
     """
     Calculate charge density using Poisson equation: rho = -1/(4*pi) * nabla^2(U)
@@ -100,6 +102,7 @@ def calculate_charge_density(potential_grid, dx, dy):
     rho = -laplacian_U / (4 * np.pi)
 
     return rho
+
 
 def plot_results(potential, charge_density, x_coords, y_coords):
     """
@@ -138,6 +141,7 @@ def plot_results(potential, charge_density, x_coords, y_coords):
 
     plt.tight_layout()
     plt.show()
+
 
 if __name__ == "__main__":
     # Simulation parameters
