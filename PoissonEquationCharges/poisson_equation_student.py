@@ -9,7 +9,7 @@
 """
 求解正负电荷构成的泊松方程
 文件：poisson_equation_solution.py
-
+"""
 import numpy as np  # 导入NumPy库用于数值计算
 import matplotlib.pyplot as plt  # 导入Matplotlib库用于数据可视化
 from typing import Tuple  # 导入Tuple用于类型注解
