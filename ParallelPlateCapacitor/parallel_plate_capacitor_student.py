@@ -1,5 +1,4 @@
-# 模块说明：平行板电容器问题求解
-# 文件：parallel_plate_capacitor_solution.py
+
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
