@@ -50,7 +50,9 @@ def solve_ode(h, g, max_iter=10000, tol=1e-6):
         # 更新解
         x = x_new
         iter_count += 1
-    
+
+        #输出迭代次数
+    print(f"收敛于 {iter_count} 次迭代，最终变化量: {delta:.2e}")
     return t, x
 
 if __name__ == "__main__":
@@ -73,3 +75,4 @@ if __name__ == "__main__":
     max_height = np.max(x)
     max_time = t[np.argmax(x)]
     print(f"最高高度: {max_height:.2f} m 当 t = {max_time:.2f} s")
+    
