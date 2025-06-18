@@ -43,6 +43,23 @@ def solve_poisson_equation(M: int = 100, target: float = 1e-6, max_iterations: i
     4. 松弛迭代直到收敛
     5. 返回结果
     """
+    # 网格设置
+    M = 100
+    h = 1.0  # 网格间距
+
+    # 电荷密度分布
+    rho = np.zeros((M+1, M+1), float)
+    rho[60:80, 20:40] = 1.0   # 正电荷
+    rho[20:40, 60:80] = -1.0  # 负电荷
+
+    # 迭代公式（注意h^2项）
+    phi[1:-1, 1:-1] = 0.25 * (phi[0:-2, 1:-1] + phi[2:, 1:-1] + 
+                          phi[1:-1, :-2] + phi[1:-1, 2:] + 
+                          h*h * rho[1:-1, 1:-1])
+    delta=1.0
+    iterations=0
+    converged=False
+    
     # TODO: 设置网格间距
     h = 1.0
     
